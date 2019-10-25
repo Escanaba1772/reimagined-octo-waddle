@@ -1,47 +1,60 @@
-import MultipleBounceBall.MultipleBallPane;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.beans.property.DoubleProperty;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.util.Duration;
-import javafx.application.Application;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+public class Windows extends Application {
 
-public class MultipleBounceBall extends Application {
-	  @Override // Override the start method in the Application class
-	  public void start(Stage primaryStage) {
-	    MultipleBallPane ballPane = new MultipleBallPane();
-	    ballPane.setStyle("-fx-border-color: yellow");
-
-	    Button btStart = new Button("Start");
-	    HBox hBox = new HBox(10);
-	    hBox.getChildren().addAll(btStart);
-	    hBox.setAlignment(Pos.CENTER);
-	    
-	    BorderPane pane = new BorderPane();
-	    pane.setCenter(ballPane);
-	    pane.setBottom(hBox);
-	    
-	    Scene scene = new Scene(pane, 400, 400);
-	    primaryStage.setTitle("Project 2"); // Set the stage title
-	    primaryStage.setScene(scene); // Place the scene in the stage
-	    primaryStage.show(); // Display the stage
-
-}
-	  private class MultipleBallPane extends Pane {}
-	  
-	  public static void main(String[] args) {
-		    launch(args);
-		  	}
+	//set the window and scenes needed for the game
+	Stage window;
+	Scene scene1, scene2, scene3;
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception{
+		window = primaryStage;
+		
+		//Create the buttons that allow the user to select difficulty mode and start game
+		Label label1 = new Label("Eliminate the Disks");
+		Button button1 = new Button("Easy Mode");
+		button1.setOnAction(e -> window.setScene(scene2));
+		Button button3 = new Button("Medium Mode");
+		button3.setOnAction(e -> window.setScene(scene3));
+		
+		//Set the scene for the start window
+		VBox layout1 = new VBox(20);
+		layout1.setAlignment(Pos.CENTER);
+		layout1.getChildren().addAll(label1, button1, button3);
+		scene1 = new Scene(layout1, 300, 300);
+		
+		//buttons that allow the user to exit the game and return to the start scene
+		Button button2 = new Button("Exit Game");
+		button2.setOnAction(e -> window.setScene(scene1));		
+		Button button4 = new Button("Exit Game");
+		button4.setOnAction(e -> window.setScene(scene1));
+		
+		//Set the easy mode scene
+		VBox layout2 = new VBox(10);
+		Label label2 = new Label("Easy Mode");
+		layout2.setAlignment(Pos.CENTER);
+		layout2.getChildren().addAll(label2, button4);
+		scene2 = new Scene(layout2, 300, 300);
+		
+		//Set the medium mode scene
+		VBox layout3 = new VBox(10);
+		Label label3 = new Label("Medium Mode");
+		layout3.setAlignment(Pos.CENTER);
+		layout3.getChildren().addAll(label3, button2);
+		scene3 = new Scene(layout3, 300, 350);
+		
+		//Sets the window for the game
+		window.setScene(scene1);
+		window.setTitle("Group Project 2");
+		window.show();	
+	}
 }
