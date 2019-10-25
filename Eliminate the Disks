@@ -42,6 +42,7 @@ public class Windows extends Application {
 		VBox layout2 = new VBox(10);
 		Label label2 = new Label("Easy Mode");
 		layout2.setAlignment(Pos.CENTER);
+		layout2.setBackground(null);
 		layout2.getChildren().addAll(label2, button4);
 		scene2 = new Scene(layout2, 300, 300);
 		
@@ -49,6 +50,7 @@ public class Windows extends Application {
 		VBox layout3 = new VBox(10);
 		Label label3 = new Label("Medium Mode");
 		layout3.setAlignment(Pos.CENTER);
+		layout3.setBackground(null);
 		layout3.getChildren().addAll(label3, button2);
 		scene3 = new Scene(layout3, 300, 350);
 		
