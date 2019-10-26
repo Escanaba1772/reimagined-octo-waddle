@@ -3,18 +3,20 @@ import java.util.Random;
 
 import javax.swing.Timer;
 
-import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-public class GameApp extends Application {
+public class Windows extends Application {
 
 	//set the window and scenes needed for the game
 	Stage window;
@@ -28,33 +30,36 @@ public class GameApp extends Application {
 	public void start(Stage primaryStage) throws Exception{
 		window = primaryStage;
 		
-		//Create the buttons that allow the user to select difficulty mode and start game
+		//Create the buttons that allow the user to select difficulty mode and start game or exit the game
 		Label label1 = new Label("Eliminate the Disks");
 		Button button1 = new Button("Easy Mode");
 		button1.setOnAction(e -> window.setScene(scene2));
-		Button button3 = new Button("Hard Mode");
+		Button button3 = new Button("Medium Mode");
 		button3.setOnAction(e -> window.setScene(scene3));
+		Button button5 = new Button("Exit");
+		button5.setOnAction(e -> Platform.exit());
 		
 		//Set the scene for the start window
 		VBox layout1 = new VBox(20);
 		layout1.setAlignment(Pos.CENTER);
-		layout1.getChildren().addAll(label1, button1, button3);
+		layout1.setBackground(new Background(new BackgroundFill(Color.GREEN, null, null)));
+		layout1.getChildren().addAll(label1, button1, button3, button5);
 		scene1 = new Scene(layout1, 300, 300);
 		
 		Circle ball = new Circle(10, Color.RED);
         ball.relocate(0, 10);
-        
+		
 		//buttons that allow the user to exit the game and return to the start scene
-		Button button2 = new Button("Exit Game");
+		Button button2 = new Button("Main Menu");
 		button2.setOnAction(e -> window.setScene(scene1));		
-		Button button4 = new Button("Exit Game");
+		Button button4 = new Button("Main Menu");
 		button4.setOnAction(e -> window.setScene(scene1));
 		
 		//Set the easy mode scene
 		VBox layout2 = new VBox(10);
 		Label label2 = new Label("Easy Mode");
-		layout2.setAlignment(Pos.CENTER);
-		layout2.setBackground(null);
+		layout2.setAlignment(Pos.TOP_RIGHT);
+		layout2.setBackground(new Background(new BackgroundFill(Color.YELLOW, null, null)));
 		layout2.getChildren().addAll(label2, button4, ball);
 		scene2 = new Scene(layout2, 300, 300);
 		
@@ -62,17 +67,13 @@ public class GameApp extends Application {
 		VBox layout3 = new VBox(10);
 		Label label3 = new Label("Medium Mode");
 		layout3.setAlignment(Pos.CENTER);
-		layout3.setBackground(null);
+		layout3.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
 		layout3.getChildren().addAll(label3, button2);
-		scene3 = new Scene(layout3, 300, 300);
-		
+		scene3 = new Scene(layout3, 300, 350);
 		
 		//Sets the window for the game
 		window.setScene(scene1);
 		window.setTitle("Group Project 2");
-		window.show();
-		
-		
-		
+		window.show();	
 	}
 }
