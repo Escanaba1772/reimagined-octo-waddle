@@ -78,7 +78,7 @@ public class Windows extends Application {
 	}
 }
 
-/** New code starts here */
+//new new code
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -94,11 +94,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaBuilder;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-public class Windows extends Application {
+public class GameApp extends Application {
 
 	//set the window and scenes needed for the game
 	Stage window;
@@ -134,6 +137,10 @@ public class Windows extends Application {
 		
 		Button button5 = new Button("Exit");
 		button5.setOnAction(e -> Platform.exit());
+		
+		Media media = new Media("audio/Blazer-Rail.wav");
+		MediaPlayer mediaPlayer = new MediaPlayer(media);
+		
 			
 		//Set the scene for the start window
 		VBox layout1 = new VBox(20);
@@ -141,9 +148,6 @@ public class Windows extends Application {
 		layout1.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 		layout1.getChildren().addAll(label1, button1, button3, button5);
 		scene1 = new Scene(layout1, 300, 300);
-		
-		//Circle ball = new Circle(10, Color.RED);
-        //ball.relocate(0, 10);
 		
 		//Set the easy mode scene and controls for starting and returning to the main menu
 	    Button btAdd = new Button("+");
@@ -206,10 +210,13 @@ public class Windows extends Application {
 	      animation.setCycleCount(Timeline.INDEFINITE);
 	      animation.play(); // Start animation
 	    }
+	    
 	    public void add() {
 	        Color color = new Color(Math.random(), 
 	          Math.random(), Math.random(), 0.5);
-	        getChildren().add(new Ball(30, 30, Math.random()*15, color));
+	        double x = (Math.random() * 30) + 30;
+	        double y = (Math.random() * 30) + 30;
+	        getChildren().add(new Ball(x, y, Math.random()*15 + 10, color));
 	      }
 	      
 	      public void subtract() {
@@ -248,7 +255,7 @@ public class Windows extends Application {
 	    }
 
 	    class Ball extends Circle {
-	      private double dx = 1, dy = 1;
+	      private double dx = ((Math.random() +1) * 10) - 9, dy = ((Math.random() +1) * 10) - 9;
 
 	      Ball(double x, double y, double radius, Color color) {
 	        super(x, y, radius);
