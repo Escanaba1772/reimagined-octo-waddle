@@ -29,6 +29,7 @@ public class GameApp extends Application {
 	//global variables for ball count
 	int numberOfBallsEasy = 30;
 	int numberOfBallsMedium = 45;
+	String errorMessage = "There are no balls left";
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -55,6 +56,7 @@ public class GameApp extends Application {
 		
 		//Create the buttons that allow the user to select difficulty mode and start game or exit the game
 		Label label1 = new Label("Eliminate the Disks");
+		Label outOfBalls = new Label(errorMessage);
 		
 		Button button1 = new Button("Easy Mode");
 		button1.setOnAction(e -> window.setScene(scene2));
@@ -75,19 +77,19 @@ public class GameApp extends Application {
 		layout1.setAlignment(Pos.CENTER);
 		layout1.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 		layout1.getChildren().addAll(label1, button1, button3, button5);
-		scene1 = new Scene(layout1, 300, 300);
+		scene1 = new Scene(layout1, 400, 400);
 		
 		//Set the easy mode scene and controls for starting and returning to the main menu
-	    Button btAdd = new Button("+");
+	    Button btAdd = new Button("Add Balls");
 	    btAdd.setOnAction(e -> ballPane.add(numberOfBallsEasy));
 	    
-	    Button btSubtract = new Button("-");
-	    btSubtract.setOnAction(e -> ballPane.subtract());
+	    Button btSubtract = new Button("Remove Balls");
+	    btSubtract.setOnAction(e -> ballPane.subtract(outOfBalls));
 	    
-	    Button btPlay = new Button(">");
+	    Button btPlay = new Button("Play");
 	    btPlay.setOnAction(e -> ballPane.play()); 
 	    
-	    Button btPause = new Button("||");
+	    Button btPause = new Button("Pause");
 	    btPause.setOnAction(e -> ballPane.pause());
 	    
 		Button button2 = new Button("Main Menu");
@@ -98,19 +100,20 @@ public class GameApp extends Application {
 	    hBox.getChildren().addAll(btAdd, btSubtract, btPlay, btPause, button2);	    
 	    pane.setCenter(ballPane);
 	    pane.setBottom(hBox);
-		scene2 = new Scene(pane, 300, 300);
+	    ballPane.add(numberOfBallsEasy);
+		scene2 = new Scene(pane, 400, 400);
 		
 		//Set the medium mode scene and controls for starting and returning to the main menu
-	    Button buttonAdd = new Button("+");
+	    Button buttonAdd = new Button("Add Balls");
 	    buttonAdd.setOnAction(e -> ballPane2.add(numberOfBallsEasy));
 	    
-	    Button buttonSubtract = new Button("-");
-	    buttonSubtract.setOnAction(e -> ballPane2.subtract());
+	    Button buttonSubtract = new Button("Remove Balls");
+	    buttonSubtract.setOnAction(e -> ballPane2.subtract(outOfBalls));
 	    
-	    Button buttonPlay = new Button(">");
+	    Button buttonPlay = new Button("Play");
 	    buttonPlay.setOnAction(e -> ballPane2.play());
 	    
-	    Button buttonPause = new Button("||");
+	    Button buttonPause = new Button("Pause");
 	    buttonPause.setOnAction(e -> ballPane2.pause());
 	    
 		Button button4 = new Button("Main Menu");
@@ -121,8 +124,9 @@ public class GameApp extends Application {
 	    hBox2.getChildren().addAll(buttonAdd, buttonSubtract, buttonPlay, buttonPause, button4);
 	    pane2.setCenter(ballPane2);
 	    pane2.setBottom(hBox2);
-		scene3 = new Scene(pane2, 300, 350);
-				
+	    ballPane2.add(numberOfBallsMedium);
+		scene3 = new Scene(pane2, 400, 400);
+		
 		//Sets the window for the game
 		window.setScene(scene1);
 		window.setTitle("Group Project 2");
@@ -151,12 +155,13 @@ public class GameApp extends Application {
 	    	}
 	    }
 	      
-	      public void subtract() {
-	        if (getChildren().size() > 0) {
-	          getChildren().remove(getChildren().size() - 1); 
+	      public void subtract(Label outOfBalls) {
+	    	if (getChildren().size() > 0)
+	        while (getChildren().size() > 0) {
+	        		getChildren().remove(getChildren().size()-1); 
 	        }
-	        if(getChildren().size() == 0) {
-	      	  System.out.println("There are no balls left"); // This will run but it does not print in the application window, it will print in the IDE.
+	    	else {
+	        	//getChildren().add(errorMessage);
 	        }
 	      }
 
