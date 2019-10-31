@@ -53,6 +53,19 @@ public class GameApp extends Application {
 	    
 	    BorderPane pane = new BorderPane();
 	    BorderPane pane2 = new BorderPane();
+	    
+	    //allows the user to remove balls from the game
+	    ballPane.setOnMouseClicked(e -> {
+	    	if(e.getButton() == MouseButton.PRIMARY) {
+	    		ballPane.getChildren().remove(e.getTarget());
+	    	}
+	    });
+	    
+	    ballPane2.setOnMouseClicked(e -> {
+	    	if(e.getButton() == MouseButton.PRIMARY) {
+	    		ballPane2.getChildren().remove(e.getTarget());
+	    	}
+	    });
 		
 		//Create the buttons that allow the user to select difficulty mode and start game or exit the game
 		Label label1 = new Label("Eliminate the Disks");
